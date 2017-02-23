@@ -75,9 +75,9 @@ export class ColorInput extends Component {
 		return defType;
 	}
 }
-export class Asset extends Component {
+export class Asset extends PropertyUI {
 	render() {
-		return defType;
+		return <button onClick={()=>this.props.selectFunction(this.state.propertyName)}>Upload Image</button>
 	}
 }
 // Used only by Form - Close/OpenScreenAnimation

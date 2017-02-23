@@ -100,7 +100,7 @@ export default class Item extends Component {
 					<div onClick={this.handleClick} style={{...style, backgroundColor }}>
 					{$Name}</div>
 				)}
-				<div style={{display}}>
+				<div style={{display:display}}>
 				<Tree 
 					parent={Uuid}
 					items={children}

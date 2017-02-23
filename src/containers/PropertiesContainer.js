@@ -28,6 +28,9 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
   updateComponentProperty: (componentId, propertyName, newValue) => {
     dispatch(updateComponent(componentId, propertyName, newValue))
+  },
+  chooseProperty: (propertyName) => {
+  	dispatch({type: "SELECT_IMAGE_PROPERTY", name: propertyName})
   }
 })
 
