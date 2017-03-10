@@ -7,6 +7,7 @@ import ExportContainer from '../containers/ExportContainer'
 import ScreensContainer from '../containers/ScreensContainer'
 import AddButtonContainer from '../containers/AddButtonContainer'
 import ImagePickerContainer from '../containers/ImagePickerContainer'
+import ColorPickerContainer from '../containers/ColorPickerContainer'
 
 /**
  * Gives some style to the containers.
@@ -75,6 +76,11 @@ const App = () => (
 		<div style={panel_style}>
 			<div style={headings}>ImagePicker</div>
 			<ImagePickerContainer />
+		</div>
+
+		<div style={panel_style}>
+			<div style={headings}>ColorPicker</div>
+			<ColorPickerContainer />
 		</div>
 
 

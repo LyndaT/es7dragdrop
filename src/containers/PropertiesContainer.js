@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Properties from '../components/Properties'
-import { updateComponent } from '../actions'
+import { updateComponent, selectComponent } from '../actions'
 
 /**
  * Properties Container handles the Properties panel, links it to component
@@ -29,8 +29,17 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   updateComponentProperty: (componentId, propertyName, newValue) => {
     dispatch(updateComponent(componentId, propertyName, newValue))
   },
-  chooseProperty: (propertyName) => {
-  	dispatch({type: "SELECT_IMAGE_PROPERTY", name: propertyName})
+
+  chooseProperty: (componentId, propertyName, type) => {
+    console.log(propertyName);
+    switch(type){
+      case 'color':
+        dispatch({type: "SELECT_COLOR_PROPERTY", name: propertyName})
+        break
+      case 'asset':
+        dispatch({type: "SELECT_IMAGE_PROPERTY", name: propertyName})
+        break
+    }
   }
 })
 

@@ -70,14 +70,24 @@ export class StringInput extends PropertyUI {
 		return <input type="text" value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)} />;
 	}
 }
-export class ColorInput extends Component {
+export class ColorInput extends PropertyUI {
 	render() {
-		return defType;
+		return (
+			<div>
+			<div style={{backgroundColor: '#' + this.props.value.substr(this.props.value.length - 6), width: "30px", height: "30px"}}></div>
+			<button onClick={()=>this.props.selectFunction(this.state.componentId, this.state.propertyName, "color")}>Choose Color</button>
+			</div>
+			);
 	}
 }
 export class Asset extends PropertyUI {
 	render() {
-		return <button onClick={()=>this.props.selectFunction(this.state.propertyName)}>Upload Image</button>
+		return (
+			<div>
+			<div><img src = {this.props.value} width = "50"></img></div>
+			<button onClick={()=>this.props.selectFunction(this.state.componentId, this.state.propertyName, "asset")}>Upload Image</button>
+			</div>
+			)
 	}
 }
 // Used only by Form - Close/OpenScreenAnimation

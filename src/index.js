@@ -33,9 +33,10 @@ const store = createStore(reducer, {dustbins: [],
 	selectedComponent: "0", 
 	toggled: {"0": true, "939054039": true, "1961822558": true,"-496282275": true, "53776343": true, "-1864349167":true},
 	selectedScreen: "0",
-	editorSettings: { "selectedProperty": "null", "imagePickerVisible": false},
+	editorSettings: { "selectedProperty": "null", "imagePickerVisible": false, "selectedImage": "null", "colorPickerVisible": false, "selectedColor": "#FFFFFF"},
 	uploadedImages: [],
-	defaultImages: ["https://i.ytimg.com/vi/OjMiTGrCSaA/hqdefault.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Kitten_in_Rizal_Park,_Manila.jpg/230px-Kitten_in_Rizal_Park,_Manila.jpg"]
+	defaultImages: ["https://i.ytimg.com/vi/OjMiTGrCSaA/hqdefault.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Kitten_in_Rizal_Park,_Manila.jpg/230px-Kitten_in_Rizal_Park,_Manila.jpg"],
+	defaultColors: ["&HFF0000FF", "&HFF00FF00", "&HFFFF0000", "&HFFFFFFFF"]
 
 })
 
