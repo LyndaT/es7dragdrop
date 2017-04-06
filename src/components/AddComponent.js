@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Collapse, {Panel} from 'rc-collapse';
+
 // import simple_components from './simple_components'
 
 /**
@@ -9,6 +11,15 @@ import React, { Component } from 'react';
  */
 
 export default class AddComponent extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeKey : 'LAYOUT',
+    };
+  }
+
+
   render() {
     var currentState = this.props.components;
     var stateString = JSON.stringify(currentState);
@@ -45,23 +56,26 @@ export default class AddComponent extends Component {
 	// Creates buttons for creating type of each component and adding to store
     // Buttons categorized above
 	return (
-		<div>
-            <div style={{width:'500px', wordWrap:'break-word'}}>{stateString}</div>
-			{categories.map((categoryName) => 
-				<div>
-					<button style={{backgroundColor: '#a3fff2', fontSize: '11pt'}}>{categoryName}</button>
-					<br/>
-					{componentCategories[categoryName].map((compType) =>
-						<div>
-                            <button onClick={() => this.props.addComponent(compType, selectedScreen)}>
-								{compType}
-							</button>
-                            <br/>
-                        </div>
-					)}
-				</div>
-			)}
-		</div>
+
+        <div>
+            <div style={{width:'240px', wordWrap:'break-word', display: 'none'}}>{stateString}</div>
+            <Collapse accordion={true} defaultActiveKey={'USERINTERFACE'}>
+            {categories.map((categoryName) => 
+                <Panel header={categoryName} key={categoryName} style = {{fontSize: '11pt', fontWeight: 'bold', marginTop: '0.25em', 
+                                marginBottom: '0.25em'}} onSelect={()=>alert('It works')}>
+                {componentCategories[categoryName].map((compType) =>
+                    <div style = {{backgroundColor: '#FFFFFF'}}>
+                        <button onClick={() => this.props.addComponent(compType, selectedScreen)}>
+                            {compType}
+                        </button>
+                        <br/>
+                    </div>
+                )}
+                </Panel>
+            )}
+            </Collapse>
+        </div>
+
 	);
 	}
 }

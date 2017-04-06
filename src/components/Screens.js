@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Dropdown from 'react-dropdown';
 
 /**
  * Screens creates the bar of screen tabs at the top of the page.
@@ -11,18 +12,23 @@ const screen_tab_style = {
 	float: 'left',
 	position: 'relative',
 	cursor: 'default'
-}
+};
+
+
 
 export default class Screens extends Component {
 	render () {
 		var thisComponent = this;
 		var screens = this.props.screens;
 
+		const options = screens;
+
 		return (
 			<div>
 				<button onClick={() => this.props.addComponent("Form", null)}>Add Screen</button>
 				<button onClick={() => this.props.removeScreen(thisComponent.props.selectedScreen)}>Remove Screen</button>
 				<br/>
+				<Dropdown options={options}/>
 				{screens.map(({name, Uuid}) => {
 					var tabColor = this.props.selectedScreen === Uuid ? 'pink' : 'lightyellow';
 					

@@ -1,3 +1,4 @@
+import 'rc-collapse/assets/index.css';
 import { connect } from 'react-redux'
 import AddComponent from '../components/AddComponent'
 import { addNewComponent } from '../actions'

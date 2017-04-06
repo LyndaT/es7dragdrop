@@ -66,7 +66,8 @@ export default class Properties extends Component {
 		var getEditorTypeHTML = function(editorType, inputValue, componentId, propertyName) {
 			var EdType = typeToHTML[editorType];
 			if (EdType) {
-				return <EdType value={inputValue} componentId={componentId} propertyName={propertyName} onChangeFunction={thisComponent.props.updateComponentProperty} />
+				return <EdType value={inputValue} componentId={componentId} propertyName={propertyName} 
+				onChangeFunction={thisComponent.props.updateComponentProperty} selectFunction = {thisComponent.props.chooseProperty}/>
 			}
 			else return null;
 		}
