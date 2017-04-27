@@ -4,6 +4,7 @@ import Tree from './s_Tree';
 import { DragSourceTypes } from '../constants/DragSourceTypes';
 import Dropzone from './Dropzone';
 import { DropZoneTypes } from "../constants/DropZoneTypes";
+import ItemButton from './appinventorComponents/s_ItemButton';
 
 const style = {
 	padding: '0.5em'
@@ -46,12 +47,32 @@ export default class Item extends Component {
 		super(props);
 		this.state = {isToggleOn: false};
 		this.handleClick = this.handleClick.bind(this);
+		this.renderItem = this.renderItem.bind(this);
 	}
 
 	handleClick() {
 		this.setState(prevState => ({
 			isToggleOn: !prevState.isToggleOn
 		}));
+	}
+
+	renderItem(name, backgroundColor, uuid) {
+		//console.log(this.props.component);
+		//console.log(this.props.item.type);
+		if (this.props.item.type == 'Button') {
+			//Pass to ItemButton
+			return (
+				<div>
+					<ItemButton 
+						component={this.props.component}
+					/>
+				</div>
+				);
+		}
+		return (
+			<div onClick={this.handleClick} style={{...style, backgroundColor }}>
+					{name}</div>
+			);
 	}
 
 	render() {
@@ -79,8 +100,7 @@ export default class Item extends Component {
 		return (
 			<div>
 				{connectDragSource(
-					<div onClick={this.handleClick} style={{...style, backgroundColor }}>
-					{$Name}</div>
+					this.renderItem($Name, backgroundColor, Uuid)
 				)}
 				<div style={contentDropzoneStyle}>
 					<Dropzone

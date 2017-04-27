@@ -9,6 +9,7 @@ export default class Button extends Component {
 		var defaultButtonComponent = simpleComponents.filter(function(component) {
 			return component.name == "Button";
 		})
+		
 		var propertiesArray = defaultButtonComponent[0].properties;
 		var defaults = {};
 		propertiesArray.forEach(function(property){

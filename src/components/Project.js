@@ -10,6 +10,7 @@ import ScreensContainer from '../containers/ScreensContainer';
 
 import ImagePickerContainer from '../containers/ImagePickerContainer'
 import ColorPickerContainer from '../containers/ColorPickerContainer'
+import ButtonContainer from '../containers/appinventorContainers/ButtonContainer'
 
 /**
  * Gives some style to the containers.
@@ -86,7 +87,7 @@ const headings = {
 export default class Project extends Component {
     render() {
         return (
-                <div style = {body_style}>
+                <div style={body_style}>
                     <div style={screens_panel_style}>
                         <ExportContainer />
                     </div>
@@ -95,7 +96,7 @@ export default class Project extends Component {
                         <ScreensContainer />
                     </div>
 
-                    <div style = {body_holder_style}>
+                    <div style={body_holder_style}>
                         <div style={fixed_style}>
                             <div style={headings}>Palette</div>
                             <AddComponentContainer />

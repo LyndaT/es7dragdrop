@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { DropTarget } from 'react-dnd';
-import Item from './s_Item';
+import ItemContainer from '../containers/ItemContainer';
 
 export default class Tree extends Component {
 	static propTypes = {
@@ -21,7 +21,7 @@ export default class Tree extends Component {
 				cursor: 'move', 
 			}}>
 				{items.map((item, i) => {
-					return <Item 
+					return <ItemContainer 
 						key={item.Uuid}
 						id={item.Uuid}
 						parent={parent}
