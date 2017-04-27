@@ -47,6 +47,7 @@ export function selectScreen(screenId) {
   return Object.assign({type: 'SELECT_SCREEN'}, {id: screenId})
 }
 
-export function deleteComponent(compId, selScreen, delScreen) {
-  return Object.assign({type: 'DELETE_COMPONENT'}, {id: compId, selectedScreen: selScreen, deleteScreen: delScreen})
+export function deleteComponent(compId, selScreen) {
+  // return Object.assign({type: 'DELETE_COMPONENT'}, {id: compId, selectedScreen: selScreen, deleteScreen: delScreen})
+  return Object.assign({type: 'DELETE_COMPONENT'}, {id: compId, selectedScreen: selScreen})
 }

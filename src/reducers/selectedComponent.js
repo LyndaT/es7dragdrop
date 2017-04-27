@@ -18,8 +18,7 @@ const selectedComponent = (state = "", action) => {
 		case 'SELECT_SCREEN':
 			return action.id
 		case 'DELETE_COMPONENT':
-			if (action.deleteScreen) return "0";
-			else return action.selectedScreen;
+			return action.selectedScreen;
 		default:
 			return state
 	}

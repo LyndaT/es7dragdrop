@@ -19,12 +19,9 @@ const toggled = (state = {}, action) => {
 			newState[action.Uuid] = true;
 			return newState;
 		case 'DELETE_COMPONENT':
-			if (action.id !== "0" && !(action.id === action.selectedScreen && !action.deleteScreen)) {
-				newState = Object.assign({}, state);
-				delete newState[action.id]
-				return newState;
-			}
-			else return state
+			newState = Object.assign({}, state);
+			delete newState[action.id];
+			return newState;
 		default:
 			return state
 	}

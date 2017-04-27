@@ -70,20 +70,24 @@ const components = (state = [], action) => {
 		 * If screen is "Screen1", i.e. component id = "0", nothing happens
 		 */
 		case 'DELETE_COMPONENT':
-			if (action.id === "0" ||(action.id === action.selectedScreen && !action.deleteScreen)) return state;
 			var subComps = getAllSubcomponents(action.id, state);
 			var newState = [];
 			state.forEach(function(component) {
 				var comp = Object.assign({}, component);
 				if (comp.children && comp.children.includes(action.id)) {
+					// find index of input in it's parent's array of children
 					var index = comp.children.indexOf(action.id);
+					// slice - create a copy of array
 					var children = comp.children.slice();
+					// splice - modifies array, deletes # items starting at index
 					children.splice(index, 1);
 					comp.children = children;
 				}
 
+				// if component is not a subcomponent of input
 				if (!subComps.hasOwnProperty(comp.Uuid)) {
-					newState.push(comp)
+					// add the component to new state
+					newState.push(comp);
 				}
 			})
 			return newState;

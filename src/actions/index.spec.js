@@ -73,8 +73,7 @@ describe('actions', () => {
     expect(actions.deleteComponent("2", "0", false)).toEqual({
       type: 'DELETE_COMPONENT',
       id: "2",
-      selectedScreen: "0",
-      deleteScreen: false
+      selectedScreen: "0"
     })
   })
 

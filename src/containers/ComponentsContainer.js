@@ -15,8 +15,8 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  removeComponent: (id, selectedScreen, delScreen=false) => {
-  	dispatch(deleteComponent(id, selectedScreen, delScreen))
+  removeComponent: (id, selectedScreen) => {
+  	dispatch(deleteComponent(id, selectedScreen))
   }
 })
 
