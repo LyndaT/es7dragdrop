@@ -11,14 +11,6 @@ let defType = <button type="button">Upload/Color</button>;
 
 // All editor types need this.state
 export class PropertyUI extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-	    	value: this.props.value,
-	    	propertyName: this.props.propertyName,
-	    	componentId: this.props.componentId
-  		};
-	}
 }
 
 PropertyUI.propTypes = {
@@ -30,23 +22,23 @@ PropertyUI.propTypes = {
 // Different from other inputs - uses checked, not value
 export class BooleanInput extends PropertyUI {
 	render() {
-		return <input type="checkbox" checked={(this.props.value==='True')} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, (event.target.checked ? "True" : "False") )}/>;
+		return <input type="checkbox" checked={(this.props.value==='True')} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, (event.target.checked ? "True" : "False") )}/>;
 	}
 }
 // Different from other inputs - uses checked, not value
 export class Visibility extends PropertyUI {
 	render() {
-		return <input type="checkbox" checked={(this.props.value === 'True')} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, (event.target.checked ? "True" : "False") )}/>;
+		return <input type="checkbox" checked={(this.props.value === 'True')} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, (event.target.checked ? "True" : "False") )}/>;
 	}
 }
 export class TextArea extends PropertyUI {
   render() {
-    return <textarea value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)} />;}
+    return <textarea value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)} />;}
 }
 export class HorizontalAlignment extends PropertyUI {
 	render() {
 		return (
-			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}>
+			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}>
 				<option value="1">Left: 1</option>
 				<option value="3">Center: 3</option>
 				<option value="2">Right: 2</option>
@@ -57,7 +49,7 @@ export class HorizontalAlignment extends PropertyUI {
 export class VerticalAlignment extends PropertyUI {
 	render() {
 		return (
-			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}>
+			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}>
 				<option value="1">Top: 1</option>
 				<option value="2">Center: 2</option>
 				<option value="3">Bottom: 3</option>
@@ -67,7 +59,7 @@ export class VerticalAlignment extends PropertyUI {
 }
 export class StringInput extends PropertyUI {
 	render() {
-		return <input type="text" value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)} />;
+		return <input type="text" value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)} />;
 	}
 }
 export class ColorInput extends Component {
@@ -84,7 +76,7 @@ export class Asset extends Component {
 export class ScreenAnimation extends PropertyUI {
 	render() {
 		return (
-			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}>
+			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}>
 				<option value="default">Default</option>
 				<option value="fade">Fade</option>
 				<option value="zoom">Zoom</option>
@@ -99,7 +91,7 @@ export class ScreenAnimation extends PropertyUI {
 export class ScreenOrientation extends PropertyUI {
 	render() {
 		return (
-			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}>
+			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}>
 				<option value="unspecified">Unspecified</option>
 				<option value="portrait">Portrait</option>
 				<option value="landscape">Landscape</option>
@@ -113,7 +105,7 @@ export class ScreenOrientation extends PropertyUI {
 export class Sizing extends PropertyUI {
 	render() {
 		return (
-			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}>
+			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}>
 				<option value="Fixed">Fixed</option>
 				<option value="Responsive">Responsive</option>
 			</select>
@@ -122,14 +114,14 @@ export class Sizing extends PropertyUI {
 }
 export class NonNegativeInteger extends PropertyUI {
 	render() {
-		return <input type="number" min="0" step="1" value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}d/>;
+		return <input type="number" min="0" step="1" value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}d/>;
 	}
 }
 // Used only by AccelerometerSensor - Sensitivity
 export class AccelerometerSensitivity extends PropertyUI {
 	render() {
 		return (
-			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}d>
+			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}d>
 				<option value="1">weak</option>
 				<option value="2">moderate</option>
 				<option value="3">strong</option>
@@ -139,13 +131,13 @@ export class AccelerometerSensitivity extends PropertyUI {
 }
 export class Float extends PropertyUI {
 	render() {
-		return <input type="number" step="0.01" value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}/>;
+		return <input type="number" step="0.01" value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}/>;
 	}
 }
 export class Typeface extends PropertyUI {
 	render() {
 		return (
-			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}>
+			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}>
 				<option value="0">{"default"}</option>
 				<option value="1">san serif</option>
 				<option value="2">serif</option>
@@ -157,7 +149,7 @@ export class Typeface extends PropertyUI {
 export class ButtonShape extends PropertyUI {
 	render() {
 		return (
-			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}>
+			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}>
 				<option value="0">{"default"}</option>
 				<option value="1">rounded</option>
 				<option value="2">rectangular</option>
@@ -169,7 +161,7 @@ export class ButtonShape extends PropertyUI {
 export class TextAlignment extends PropertyUI {
 	render() {
 		return (
-			<select value={this.props.value}  onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}>
+			<select value={this.props.value}  onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}>
 				<option value="0">left: 0</option>
 				<option value="1">center: 1</option>
 				<option value="2">right: 2</option>
@@ -179,7 +171,7 @@ export class TextAlignment extends PropertyUI {
 }
 export class NonNegativeFloat extends PropertyUI {
 	render() {
-		return <input type="number" min="0" step="0.01" value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}/>
+		return <input type="number" min="0" step="0.01" value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}/>
 	}
 }
 export class BluetoothClient extends Component {
@@ -191,7 +183,7 @@ export class BluetoothClient extends Component {
 export class LegoEv3ColorSensorMode extends PropertyUI {
 	render() {
 		return (
-			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}>
+			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}>
 				<option value="reflected">reflected</option>
 				<option value="ambient">ambient</option>
 				<option value="color">color</option>
@@ -203,7 +195,7 @@ export class LegoEv3ColorSensorMode extends PropertyUI {
 export class LegoEv3SensorPort extends PropertyUI {
 	render() {
 		return (
-			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}>
+			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}>
 				<option value="1">1</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
@@ -216,7 +208,7 @@ export class LegoEv3SensorPort extends PropertyUI {
 export class LegoEV3GyroSensorMode extends PropertyUI {
 	render() {
 		return (
-			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}>
+			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}>
 				<option value="angle">angle</option>
 				<option value="rate">rate</option>
 			</select>
@@ -227,7 +219,7 @@ export class LegoEV3GyroSensorMode extends PropertyUI {
 export class LegoEv3UltrasonicSensorMode extends PropertyUI {
 	render() {
 		return (
-			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}>
+			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}>
 				<option value="cm">cm</option>
 				<option value="inch">inch</option>
 			</select>
@@ -240,7 +232,7 @@ export class FirbaseURL extends PropertyUI {
 	render() {
 		return (
 			<span>
-				<input type="text" value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}/>
+				<input type="text" value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}/>
 				<input type="checkbox" value={this.props.value}/>
 			</span>
 		);
@@ -250,7 +242,7 @@ export class FirbaseURL extends PropertyUI {
 export class SensorDistInterval extends PropertyUI {
 	render() {
 		return (
-			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}>
+			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}>
 				<option value="5">0</option>
 				<option value="6">1</option>
 				<option value="10">10</option>
@@ -263,7 +255,7 @@ export class SensorDistInterval extends PropertyUI {
 export class SensorTimeInterval extends PropertyUI {
 	render() {
 		return (
-			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}>
+			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}>
 				<option value="0">0</option>
 				<option value="1000">1000</option>
 				<option value="10000">10000</option>
@@ -277,7 +269,7 @@ export class SensorTimeInterval extends PropertyUI {
 export class ToastLength extends PropertyUI {
 	render() {
 		return (
-			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}>
+			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}>
 				<option value="0">Short</option>
 				<option value="1">Long</option>
 			</select>
@@ -294,7 +286,7 @@ export class LegoNxtGeneratedColor extends Component {
 export class LegoNxtSensorPort extends PropertyUI {
 	render() {
 		return (
-			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}>
+			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}>
 				<option value="1">1</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
@@ -340,7 +332,7 @@ export class Countries extends PropertyUI {
 			{name: "ZWE", val: "ZWE"}
 		];
 		return (
-			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}>
+			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}>
 				{allCountries.map(({name, val}) => 
 					<option value={val}>{name}</option>
 				)}
@@ -360,7 +352,7 @@ export class Languages extends PropertyUI {
 			{name: "it", val: "it"}
 		]
 		return (
-			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}>
+			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}>
 				{allLanguages.map(({name, val}) => 
 					<option value={val}>{name}</option>
 				)}
@@ -372,7 +364,7 @@ export class Languages extends PropertyUI {
 export class TextReceiving extends PropertyUI {
 	render() {
 		return (
-			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.state.componentId, this.state.propertyName, event.target.value)}>
+			<select value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)}>
 				<option value="1">Off</option>
 				<option value="2">Foreground</option>
 				<option value="3">Always</option>
