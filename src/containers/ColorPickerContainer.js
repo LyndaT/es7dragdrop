@@ -17,6 +17,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   selectColor: (componentId, propertyName, color) => {
     console.log(propertyName);
     dispatch(updateComponent(componentId, propertyName, color))
+  },
+  closeModal: () => {
+    dispatch({type: "CLOSE_MODALS"});
   }
 })
 

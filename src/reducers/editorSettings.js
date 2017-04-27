@@ -23,6 +23,12 @@ const editorSettings = (state = {}, action) => {
 			var newState = Object.assign({}, state);
 			newState.selectedImage = action.url;
 			return newState;
+		case 'CLOSE_MODALS':
+			var newState = Object.assign({}, state);
+			newState.imagePickerVisible = false;
+			newState.colorPickerVisible = false;
+			newState.selectedImage = null;
+			return newState;
 		// case 'SELECT_COLOR':
 		// 	var newState = Object.assign({}, state);
 		// 	newState.selectedColor = action.color;

@@ -22,6 +22,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
   selectImage: (componentId, propertyName, url) => {
     dispatch(updateComponent(componentId, propertyName, url))
+  },
+  closeModal: () => {
+    dispatch({type: "CLOSE_MODALS"});
   }
 })
 

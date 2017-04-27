@@ -9,6 +9,9 @@ import ScreensContainer from '../containers/ScreensContainer'
 import ImagePickerContainer from '../containers/ImagePickerContainer'
 import ColorPickerContainer from '../containers/ColorPickerContainer'
 
+//Appinventor Containers
+import ButtonContainer from '../containers/appinventorContainers/ButtonContainer'
+
 /**
  * Gives some style to the containers.
  */
@@ -112,9 +115,10 @@ const App = () => (
 		</div>
 
 		<div style={panel_style}>
-			<div style={headings}>ColorPicker</div>
-			<ColorPickerContainer />
+			<div style={headings}>Buttons</div>
+			<ButtonContainer />
 		</div>
+
 
 
 	</div>

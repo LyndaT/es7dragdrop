@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
-import simple_components from './simple_components'
+import simple_components from './simple_components';
+import ReactModal from 'react-modal';
 
 export default class ImagePicker extends Component {
   render() {
@@ -22,6 +23,7 @@ export default class ImagePicker extends Component {
 
 	// Creates buttons for creating type of each component and adding to store
 		return (
+			<ReactModal isOpen={visible} shouldCloseOnOverlayClick={visible} onRequestClose={this.props.closeModal}>
 			<div style={{width: "600px", 'wordWrap': "break-word", display: display}}>
 			<div> Button Display </div>
 			<div> <img src = {selectedImage} width = {maximagewidth}/> 
@@ -29,15 +31,18 @@ export default class ImagePicker extends Component {
 			<hr></hr>
 			<div>  {defaultimagelocs.map((image, i) => {
 					return <img src= {defaultimagelocs[i]} width = {maximagewidth} 
-					onClick={() => this.props.selectImage(component, property, defaultimagelocs[i])} />
+					onClick={() => {this.props.selectImage(component, property, defaultimagelocs[i]);
+									this.props.closeModal()}} />
 				})} </div>
 			<hr></hr>
 			<div> {uploadedimagelocs.map((image, i) => {
 					return <img src= {uploadedimagelocs[i]} width = {maximagewidth} 
-					onClick={() => this.props.selectImage(component, property, uploadedimagelocs[i])} />
+					onClick={() => {this.props.selectImage(component, property, uploadedimagelocs[i]);
+									this.props.closeModal()}} />
 				})}</div>
 			<div> <button onClick={() => this.props.uploadImage()}>Upload Image</button></div>
 			</div>
+			</ReactModal>
 		);
 	}
 }

@@ -17,18 +17,29 @@ const screen_tab_style = {
 
 
 export default class Screens extends Component {
+
 	render () {
+
 		var thisComponent = this;
 		var screens = this.props.screens;
 
-		const options = screens;
+		const options = [];
+
+		var screenMap = {};
+		screens.forEach(function(screen){
+			options.push({
+				value: screen.Uuid,
+				label: screen.name,
+			})
+			screenMap[screen.Uuid] = screen.name;
+		})
 
 		return (
 			<div>
 				<button onClick={() => this.props.addComponent("Form", null)}>Add Screen</button>
 				<button onClick={() => this.props.removeScreen(thisComponent.props.selectedScreen)}>Remove Screen</button>
 				<br/>
-				<Dropdown options={options}/>
+				<Dropdown options={options} onChange={(option)=>{thisComponent.props.chooseScreen(option.value)}} value = {screenMap[this.props.selectedScreen]} placeholder = {screenMap[this.props.selectedScreen]}/>
 				{screens.map(({name, Uuid}) => {
 					var tabColor = this.props.selectedScreen === Uuid ? 'pink' : 'lightyellow';
 					
