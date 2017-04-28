@@ -28,7 +28,14 @@ export default class ComponentNode extends Component {
 		var subComps = "";
 		if (this.props.subcomponents && this.props.toggled[this.props.id]) {
 			subComps = this.props.subcomponents.map(({$Name, Uuid, $Components}) =>
-				(<ComponentNodeContainer name={$Name} id={Uuid} subcomponents={$Components}/>)
+				(<ComponentNodeContainer
+					key={$Name + "_" + Uuid + "_" + $Components}
+					name={$Name}
+					id={Uuid}
+					subcomponents={$Components}
+					onClickFunction={this.props.onClickFunction}
+					selectedComponent={this.props.selectedComponent}
+					/>)
 			)
 		}
 

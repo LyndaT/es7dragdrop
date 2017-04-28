@@ -59,6 +59,7 @@ function create_all_objects(arr) {
 		var obj = {};
 		obj["$Name"] = entry["name"];
 		obj["Uuid"] = entry["Uuid"];
+		obj["type"] = entry["componentType"];
 		
 		var id = entry["Uuid"];
 		objs[id] = obj;

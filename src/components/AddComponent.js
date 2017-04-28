@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import { DragSource } from 'react-dnd';
+import { DragSourceTypes } from '../constants/DragSourceTypes';
+import AIComponent from './AIComponent';
+import Collapse, {Panel} from 'rc-collapse';
+
 // import simple_components from './simple_components'
 
 /**
@@ -9,6 +14,15 @@ import React, { Component } from 'react';
  */
 
 export default class AddComponent extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeKey : 'LAYOUT',
+    };
+  }
+
+
   render() {
     var currentState = this.props.components;
     var stateString = JSON.stringify(currentState);
@@ -41,27 +55,62 @@ export default class AddComponent extends Component {
     var categories = ["USERINTERFACE", "LAYOUT", "SENSORS", "CONNECTIVITY", "ANIMATION", "MEDIA", "SOCIAL", "LEGOMINDSTORMS", "STORAGE", "EXPERIMENTAL", "INTERNAL"]
 
 
-    var selectedScreen = this.props.selectedScreen;
+    var selectedScreen = this.props.selectedScreen || "0";
 	// Creates buttons for creating type of each component and adding to store
     // Buttons categorized above
 	return (
-		<div>
-            <div style={{width:'500px', wordWrap:'break-word'}}>{stateString}</div>
-			{categories.map((categoryName) => 
-				<div>
-					<button style={{backgroundColor: '#a3fff2', fontSize: '11pt'}}>{categoryName}</button>
-					<br/>
-					{componentCategories[categoryName].map((compType) =>
-						<div>
-                            <button onClick={() => this.props.addComponent(compType, selectedScreen)}>
-								{compType}
-							</button>
-                            <br/>
-                        </div>
-					)}
-				</div>
-			)}
-		</div>
+//<<<<<<< HEAD
+		// <div>
+		// 	{categories.map((categoryName) => 
+		// 		<div key={categoryName}>
+		// 			<button style={{backgroundColor: '#a3fff2', fontSize: '11pt'}}>{categoryName}</button>
+		// 			<br/>
+		// 			{componentCategories[categoryName].map((compType) =>
+		// 				<AIComponent
+		// 					compType={compType}
+		// 					onClick={this.onClick}
+		// 					onDrop={this.props.addComponent}
+		// 					key={compType}
+		// 					screen={selectedScreen}
+		// 				/>
+		// 			)}
+		// 		</div>
+		// 	)}
+  //           <div style={{width:'500px', wordWrap:'break-word'}}>{stateString}</div>
+		// </div>
+//=======
+
+        <div>
+            <div style={{width:'240px', wordWrap:'break-word', display: 'none'}}>{stateString}</div>
+            <Collapse accordion={true} defaultActiveKey={'USERINTERFACE'}>
+            {categories.map((categoryName) => 
+                <Panel header={categoryName} key={categoryName} style = {{fontSize: '11pt', fontWeight: 'bold', marginTop: '0.25em', 
+                                marginBottom: '0.25em'}} onSelect={()=>alert('It works')}>
+                {componentCategories[categoryName].map((compType) =>
+                    // <div style = {{backgroundColor: '#FFFFFF'}}>
+                    //     <button onClick={() => this.props.addComponent(compType, selectedScreen)}>
+                    //         {compType}
+                    //     </button>
+                    //     <br/>
+                    // </div>
+                    <AIComponent
+                            compType={compType}
+                            onClick={this.onClick}
+                            onDrop={this.props.addComponent}
+                            key={compType}
+                            screen={selectedScreen}
+                    />
+                )}
+                </Panel>
+            )}
+            </Collapse>
+        </div>
+
+//>>>>>>> preshelbs
 	);
+	}
+
+	onClick = (compType) => {
+		this.props.addComponent(compType, this.props.selectedScreen);
 	}
 }

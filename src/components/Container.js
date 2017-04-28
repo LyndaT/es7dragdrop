@@ -1,46 +1,66 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import Dustbin from './Dustbin';
 import Box from './Box';
 import ItemTypes from './ItemTypes';
-//import update from 'react/lib/update';
 
-@DragDropContext(HTML5Backend)
+import SourceBox from './ns_SourceBox';
+import Tree from './s_Tree';
+import { create_tree } from './helperFunctions'
+import { moveComponent } from '../actions'
+
+const style = {
+  width: 400,
+};
+
 export default class Container extends Component {
-  /* constructor(props) {
-    super(props);
-  } */
-
   render() {
-    //const { dustbins } = this.state;
+    const nestedTree = create_tree(this.props.components, this.props.selectedScreen);
     const dustbins = this.props.dustbins;
-    //console.log(this.props.dustbins);
-    
     const boxes = [
-        { name: 'Button', type: ItemTypes.BUTTON },
-        { name: 'Label', type: ItemTypes.LABEL },
-        { name: 'Table', type: ItemTypes.TABLE }
-      ]
-      // onDrop is where the problem is
-
+        { name: 'Button', type: ItemTypes.BUTTON, id: true },
+        { name: 'Label', type: ItemTypes.LABEL, id: true },
+        { name: 'Table', type: ItemTypes.TABLE, id: true }
+      ];
     return (
       <div>
-        <div style={{overflow: 'hidden', clear: 'both' }}>
-          <Dustbin droppedItems={dustbins}
-                   onDrop={(item) => this.props.handleDrop(item)}
-                   />        
-        </div>
-
-        <div style={{ overflow: 'hidden', clear: 'both' }}>
-          {boxes.map(({ name, type }, index) =>
-            <Box name={name}
-                 type={type}
-                 key={index} />
-          )}
+        <div>
+          <Tree 
+            parent={null}
+            items={[nestedTree]}
+            move={this.moveItem}
+            find={this.findItem}
+            onDrop={this.onDrop}
+          />
         </div>
       </div>
     );
   }
 
+  onDrop = (id, afterId) => {
+    this.props.onDrop(id, afterId);
+  }
+
+  moveItem = (id, afterId, nodeId) => {
+    this.props.moveComp(id, afterId, nodeId);
+  }
+
+  findItem = (id, items) => {
+
+    for (const node of items) {
+      if (node.id === id) {
+        return node
+      }
+
+      if (node.$Components && node.$Components.length) {
+        const result = this.findItem(id, node.$Components)
+        if (result) {
+          return result
+        }
+      }
+    }
+
+    return false
+  }
 }

@@ -1,5 +1,7 @@
 export default {
   BUTTON: 'button', 
   LABEL: 'label', 
-  TABLE: 'table'
+  TABLE: 'table', 
+  GREEN: 'green', 
+  PURPLE: 'purple'
 };

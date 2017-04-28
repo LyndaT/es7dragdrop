@@ -25,8 +25,6 @@ const dustbinTarget = {
 @DropTarget([ItemTypes.BUTTON, ItemTypes.LABEL, ItemTypes.TABLE], dustbinTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver()
-
-  //canDrop: monitor.canDrop()
 }))
 export default class Dustbin extends Component {
   static propTypes = {
@@ -46,7 +44,7 @@ export default class Dustbin extends Component {
     let backgroundColor = '#222';
     if (isOver) {
       backgroundColor = 'darkgreen';
-    } 
+    }
 
     return connectDropTarget(
       <div style={{ ...style, backgroundColor }}>
@@ -56,11 +54,12 @@ export default class Dustbin extends Component {
           <p>Dropped Items: {JSON.stringify(droppedItems)}</p>
         }
 
-        {droppedItems.map(({ item, type }, index) =>
-            <Box name={item}
-                 type={type}
+        {droppedItems.map((item, index) =>
+            <Box name={item.name}
+                 type={item.type}
                  key={index} />
         )}
+        
       </div>
     );
   }

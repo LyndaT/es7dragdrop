@@ -1,19 +1,20 @@
 import { connect } from 'react-redux'
 //import { setVisibilityFilter } from '../actions'
 import Container from '../components/Container'
-import { addToBin } from '../actions'
+import { addToBin, moveComponent } from '../actions'
 
 const mapStateToProps = (state, ownProps) => ({
-  dustbins: state.dustbins
+  dustbins: state.dustbins,
+  selectedScreen: state.selectedScreen,
+  components: state.components
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  handleDrop: (item) => {
-    //dispatch(addBin(index, item))
-    console.log(item)
-    console.log(item.name)
-    dispatch(addToBin(item))
-
+  onDrop: (componentId, afterId, dropZoneType) => {
+    dispatch(moveComponent(componentId, afterId, dropZoneType))
+  },
+  moveComp: (componentId, afterId, dropZoneType) => {
+    dispatch(moveComponent(componentId, afterId, dropZoneType))
   }
 })
 

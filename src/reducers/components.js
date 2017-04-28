@@ -1,4 +1,7 @@
 import { getAllSubcomponents } from '../components/helperFunctions'
+import { insertUuidIntoState, insertingIntoDescendant } from './utils/updateStateUtils';
+import { findIndex, forEach, remove } from "lodash";
+import { DropZoneTypes } from "../constants/DropZoneTypes";
 
 /** 
  * A REDUCER handling components in the store, changed when:
@@ -13,10 +16,10 @@ const component = (state = {}, action) => {
 	var newState = {}
 	switch (action.type) {
 		case 'ADD_NEW_COMPONENT':
-			componentPropertyNames = Object.keys(action);
+			componentPropertyNames = Object.keys(action.compProperties);
 			componentPropertyNames.forEach(function(property) {
 				if (property !== "type" && property !== "screenId") {
-			  		newState[property] = action[property];
+			  		newState[property] = action.compProperties[property];
 				}
 			});
 			return newState
@@ -39,18 +42,16 @@ const component = (state = {}, action) => {
 const components = (state = [], action) => {
 	switch(action.type) {
 		case 'ADD_NEW_COMPONENT':
-			var updatedState = [...state, component(undefined, action)]
-			if (action.screenId === null) {
-				return updatedState;
-			} else {
-				for (var i=0; i<updatedState.length; i++) {
-					if (updatedState[i].Uuid === action.screenId) {
-						updatedState[i].children = updatedState[i].children || [];
-						updatedState[i].children.push(action.Uuid);
-					}
-				}
-			}
+			var newState = state.map(component => Object.assign({},component))
+			var insertInChildren = action.dropZoneType === DropZoneTypes.CONTENT;
+			var updatedState = insertUuidIntoState([...newState, component(undefined, action)], action.compProperties.Uuid, action.afterId, insertInChildren);
 			return updatedState
+			// return [...state, component(undefined, action)]
+
+		// case 'UPDATE_COMPONENT':
+		// search through array
+		// find which one has id
+		// then update property
 
 		/** 
 		 * Searches through the list of components, finds the component with 
@@ -91,6 +92,30 @@ const components = (state = [], action) => {
 				}
 			})
 			return newState;
+
+		case 'MOVE_COMPONENT':
+			if (!insertingIntoDescendant(action.id, action.afterId, state)) {
+				var newState = state.map(component => Object.assign({},component))
+				var insertInChildren = action.dropZoneType === DropZoneTypes.CONTENT;
+				const index = findIndex(newState, (component) => {
+					const childIndex = findIndex(component.children, (child) => {
+						// for some reason only checking first child in children list TODO
+						return child == action.id;
+					});
+					if (childIndex > -1) {
+						return true;
+					}
+					return false;
+				});
+				remove(newState[index].children, (id) => { return id == action.id; });
+
+				
+				return insertUuidIntoState(newState, action.id, action.afterId, insertInChildren);
+			} else {
+				return state;
+			}
+
+
 		default:
 			return state
 	}

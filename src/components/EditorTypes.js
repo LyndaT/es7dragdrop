@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ColorPickerContainer from '../containers/ColorPickerContainer'
 
 /** 
  * EditorTypes creates the specified editor types that are needed for properties.
@@ -62,14 +63,25 @@ export class StringInput extends PropertyUI {
 		return <input type="text" value={this.props.value} onChange={(event)=>this.props.onChangeFunction(this.props.componentId, this.props.propertyName, event.target.value)} />;
 	}
 }
-export class ColorInput extends Component {
+export class ColorInput extends PropertyUI {
 	render() {
-		return defType;
+		return (
+			<div>
+			<div style={{backgroundColor: '#' + this.props.value.substr(this.props.value.length - 6), width: "30px", height: "30px"}}></div>
+			<button onClick={()=>this.props.selectFunction(this.state.componentId, this.state.propertyName, "color")}>Choose Color</button>
+			<ColorPickerContainer/>
+			</div>
+			);
 	}
 }
-export class Asset extends Component {
+export class Asset extends PropertyUI {
 	render() {
-		return defType;
+		return (
+			<div>
+			<div><img src = {this.props.value} width = "50"></img></div>
+			<button onClick={()=>this.props.selectFunction(this.state.componentId, this.state.propertyName, "asset")}>Upload Image</button>
+			</div>
+			)
 	}
 }
 // Used only by Form - Close/OpenScreenAnimation
