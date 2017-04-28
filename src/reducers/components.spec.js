@@ -38,6 +38,27 @@ const button1 = {
     version:"1"
 }
 
+const store1 = [
+        {"name":"Screen1", "componentType":"Form", "version":"20", "AboutScreen":"This is an App!","AppName":"Hello2","Title":"Screen1", "Uuid":"0","children": ["939054039"]},
+        {"name":"VerticalArrangement1", "componentType":"VerticalArrangement", "version":"3", "AlignHorizontal":"3", "Uuid":"939054039", "children":["1961822558","-1864349167"]},
+        {"componentType":"HorizontalArrangement", "name":"HorizontalArrangement1", "version":"3", "AlignHorizontal":"2", "Uuid":"1961822558", "children":["-496282275","53776343"]},
+        {"name":"Button1", "componentType":"Button", "version":"6", "FontSize":"16", "Text":"Text for Button1", "Uuid":"-496282275"},
+        {"name":"CheckBox1", "componentType":"CheckBox", "version":"2", "FontTypeface":"2", "Text":"Text for CheckBox1", "Uuid":"53776343"},
+        {"name":"PasswordTextBox1", "componentType":"PasswordTextBox", "version":"3", "TextAlignment":"1", "Uuid":"-1864349167"}
+    ];
+
+const deletePassword = [
+        {"name":"Screen1", "componentType":"Form", "version":"20", "AboutScreen":"This is an App!","AppName":"Hello2","Title":"Screen1", "Uuid":"0","children": ["939054039"]},
+        {"name":"VerticalArrangement1", "componentType":"VerticalArrangement", "version":"3", "AlignHorizontal":"3", "Uuid":"939054039", "children":["1961822558"]},
+        {"componentType":"HorizontalArrangement", "name":"HorizontalArrangement1", "version":"3", "AlignHorizontal":"2", "Uuid":"1961822558", "children":["-496282275","53776343"]},
+        {"name":"Button1", "componentType":"Button", "version":"6", "FontSize":"16", "Text":"Text for Button1", "Uuid":"-496282275"},
+        {"name":"CheckBox1", "componentType":"CheckBox", "version":"2", "FontTypeface":"2", "Text":"Text for CheckBox1", "Uuid":"53776343"}
+    ];
+
+const deleteVert = [
+        {"name":"Screen1", "componentType":"Form", "version":"20", "AboutScreen":"This is an App!","AppName":"Hello2","Title":"Screen1", "Uuid":"0","children": []}
+    ];
+
 describe('components reducer',() => {
     it('should return the initial state', () => {
         expect(
@@ -118,13 +139,21 @@ describe('components reducer',() => {
     })
 
     it('should handle DELETE_COMPONENT', () => {
+        // remove single component
         expect(
-            components([], {
+            components(store1, {
                 type: 'DELETE_COMPONENT',
-                id:"",
-                selectedScreen: ""
-            })
-            ).toEqual()
+                id:"-1864349167",
+                selectedScreen: "1"
+            })).toEqual(deletePassword)
+
+        // remove component with children
+        expect(
+            components(store1, {
+                type: 'DELETE_COMPONENT',
+                id:"939054039",
+                selectedScreen: "1"
+            })).toEqual(deleteVert)
     })
 
 })
