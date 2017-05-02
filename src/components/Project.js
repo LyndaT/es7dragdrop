@@ -10,6 +10,7 @@ import ScreensContainer from '../containers/ScreensContainer';
 
 import ImagePickerContainer from '../containers/ImagePickerContainer'
 import ColorPickerContainer from '../containers/ColorPickerContainer'
+import ButtonContainer from '../containers/appinventorContainers/ButtonContainer'
 
 /**
  * Gives some style to the containers.

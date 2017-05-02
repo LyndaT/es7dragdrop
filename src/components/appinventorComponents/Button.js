@@ -49,7 +49,7 @@ export default class Button extends Component {
 				})
 
 
-				console.log(buttonProps);
+				// console.log(buttonProps);
 				buttonList.push(buttonProps);
 			}
 		});

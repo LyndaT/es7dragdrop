@@ -22,6 +22,7 @@ export function addToBin(item) {
 export function addNewComponent(compType, selectedScreen, afterId, dropZoneType) {
   var name = compType + nextId;
   var compProperties = {name:name, componentType: compType, Uuid:(nextId++).toString(), version:"1", screenId:selectedScreen};
+  // console.log( compProperties)
   return Object.assign({type: 'ADD_NEW_COMPONENT'}, { compProperties, afterId, dropZoneType })
 }
 

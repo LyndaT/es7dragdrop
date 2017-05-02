@@ -40,9 +40,11 @@ const component = (state = {}, action) => {
 
 // store has array of components...update store
 const components = (state = [], action) => {
+	console.log(state)
 	switch(action.type) {
 		case 'ADD_NEW_COMPONENT':
 			var newState = state.map(component => Object.assign({},component))
+			// console.log(newState)
 			var insertInChildren = action.dropZoneType === DropZoneTypes.CONTENT;
 			var updatedState = insertUuidIntoState([...newState, component(undefined, action)], action.compProperties.Uuid, action.afterId, insertInChildren);
 			return updatedState
