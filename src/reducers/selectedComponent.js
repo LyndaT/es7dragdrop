@@ -13,7 +13,9 @@ const selectedComponent = (state = "", action) => {
 			if (action.hasSelectedSubcomp) return action.id;
 			else return state;
 		case 'ADD_NEW_COMPONENT':
-			if (action.componentType === "Form") return action.Uuid;
+			if (action.compProperties.componentType === "Form") {
+				return action.compProperties.Uuid;
+			}
 			else return state;
 		case 'SELECT_SCREEN':
 			return action.id

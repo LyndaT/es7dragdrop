@@ -7,7 +7,7 @@
 const selectedScreen = (state = "", action) => {
 	switch(action.type) {
 		case 'ADD_NEW_COMPONENT':
-			if (action.componentType === "Form") return action.Uuid;
+			if (action.compProperties.componentType === "Form") return action.compProperties.Uuid;
 			else return state;
 		case 'SELECT_SCREEN':
 			return action.id

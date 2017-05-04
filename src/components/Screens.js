@@ -35,8 +35,6 @@ export default class Screens extends Component {
 			})
 			screenMap[screen.Uuid] = screen.name;
 		})
-		console.log("screen map ")
-		console.log(screenMap)
 
 		return (
 			<div>
