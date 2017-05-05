@@ -1,8 +1,14 @@
 
-/**
- * A REDUCER handling selectedComponent in the store, changed when:
- *			component is selected (Components panel)
- * 			component or ancestor is toggled (Components panel)
+/*
+ * A REDUCER handling selectedComponent in the store.
+ * selectedComponent is the UUID of the currently selected component.
+ * It is changed when:
+ *			component is selected
+ * 			component or ancestor is toggled
+ *			new component is added
+ *			screen is selected
+ *
+ * Affects what is shown in Components and Properties panels.
  */
 
 const selectedComponent = (state = "", action) => {

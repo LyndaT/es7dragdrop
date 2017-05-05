@@ -4,11 +4,19 @@ import { findIndex, forEach, remove } from "lodash";
 import { DropZoneTypes } from "../constants/DropZoneTypes";
 
 /** 
- * A REDUCER handling components in the store, changed when:
- * 			new component is added to store (Add Components panel, Components panel)
- *			component property is updated with new input value (Properties panel)
+ * A REDUCER handling components in the store.
+ * components is an array of objects, one object for each component.
+ * A default object should contain name, type, version, and uuid.
+ * Other properties of a component are not stored until a property is changed.
+ * 
+ * It is changed when:
+ * 			new component is added to store
+ *			component property is updated with new input value
+ *			component is deleted - its subcomponents are also deleted
+ *			component is moved (arrangements)
+ *
+ * Affects what is shown in Components, Viewer, and Properties panels. 
  */
-
 
 // creates component
 const component = (state = {}, action) => {

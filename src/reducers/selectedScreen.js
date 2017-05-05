@@ -1,7 +1,12 @@
 /**
- * A REDUCER handling selectedStore in the store, changed when:
- *			different screen is selected
+ * A REDUCER handling selectedScreen in the store.
+ * selectedScreen is the UUID of the currently selected screen (which appears on the UI)
+ * It is changed when:
  *			new screen is added
+ *			different screen is selected
+ *			a screen is deleted
+ *
+ * Affects what is shown in Screens and Viewer panels.
  */
 
 const selectedScreen = (state = "", action) => {

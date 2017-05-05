@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       dispatch(selectScreen(screenId))
     },
   removeScreen: (screenId) => {
-    dispatch(deleteComponent(screenId, screenId))
+    dispatch(deleteComponent(screenId, "0"))
   }
 })
 

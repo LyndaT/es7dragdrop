@@ -1,9 +1,15 @@
 // import { getAllSubcomponents } from '../components/helperFunctions'
 
 /**
- * A REDUCER handling toggled in the store, changed when:
- * 		component is toggled (Components panel)
- *		new component is added - additional component to keep track of (Add Components panel)
+ * A REDUCER handling toggled in the store.
+ * toggled is an object mapping component UUIDs to a boolean.  
+ * 		True means subcomponents are shown.  False means subcomponents are hidden.
+ * It is changed when:
+ * 		a component is toggled
+ *		new component is added and needs to be kept track of
+ *		a component is deleted - its subcomponents are NOT deleted
+ *
+ * Affects what is shown in Components panel.
  */
 
 const toggled = (state = {}, action) => {
