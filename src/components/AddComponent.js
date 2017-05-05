@@ -22,7 +22,6 @@ export default class AddComponent extends Component {
     };
   }
 
-
   render() {
     var currentState = this.props.components;
     var stateString = JSON.stringify(currentState);
@@ -55,7 +54,6 @@ export default class AddComponent extends Component {
     var categories = ["USERINTERFACE", "LAYOUT", "SENSORS", "CONNECTIVITY", "ANIMATION", "MEDIA", "SOCIAL", "LEGOMINDSTORMS", "STORAGE", "EXPERIMENTAL", "INTERNAL"]
 
 
-    var selectedScreen = this.props.selectedScreen || "0";
 	// Creates buttons for creating type of each component and adding to store
     // Buttons categorized above
 	return (
@@ -95,10 +93,8 @@ export default class AddComponent extends Component {
                     // </div>
                     <AIComponent
                             compType={compType}
-                            onClick={this.onClick}
                             onDrop={this.props.addComponent}
                             key={compType}
-                            screen={selectedScreen}
                     />
                 )}
                 </Panel>
@@ -108,9 +104,5 @@ export default class AddComponent extends Component {
 
 //>>>>>>> preshelbs
 	);
-	}
-
-	onClick = (compType) => {
-		this.props.addComponent(compType, this.props.selectedScreen);
 	}
 }
