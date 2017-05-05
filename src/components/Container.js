@@ -7,7 +7,7 @@ import ItemTypes from './ItemTypes';
 
 import SourceBox from './ns_SourceBox';
 import Tree from './s_Tree';
-import { create_tree } from './helperFunctions'
+import { create_tree } from '../utilFunctions/subcomponentUtils'
 import { moveComponent } from '../actions'
 
 const style = {

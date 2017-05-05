@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import ComponentNodeContainer from '../containers/ComponentNodeContainer'
-// import simple_components from './simple_components';
-// import ComponentNode from './ComponentNode.js'
-// import { create_tree } from './helperFunctions'
 
 /**
  * ComponentsPanel creates the Components panel with the nested components

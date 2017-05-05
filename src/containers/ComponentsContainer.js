@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import ComponentsPanel from '../components/ComponentsPanel'
 import { deleteComponent } from '../actions'
-import { create_tree } from '../components/helperFunctions'
+import { create_tree } from '../utilFunctions/subcomponentUtils'
 
 /**
  * ComponentsContainer.js handles the Components panel in AI, as well as 

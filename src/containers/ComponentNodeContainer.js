@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import ComponentNode from '../components/ComponentNode'
 import { toggleComponent, selectComponent } from '../actions'
-import { hasChildSelected } from '../components/helperFunctions'
+import { hasChildSelected } from '../utilFunctions/subcomponentUtils'
 /**
  * ComponentNodeContainer.js handles the Component nodes, 
  * i.e the components that appear in the Components panel

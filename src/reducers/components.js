@@ -1,4 +1,4 @@
-import { getAllSubcomponents } from '../components/helperFunctions'
+import { getAllSubcomponents } from '../utilFunctions/subcomponentUtils'
 import { insertUuidIntoState, insertingIntoDescendant } from './utils/updateStateUtils';
 import { findIndex, forEach, remove } from "lodash";
 import { DropZoneTypes } from "../constants/DropZoneTypes";
