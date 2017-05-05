@@ -1,4 +1,5 @@
 import { getAllSubcomponents } from '../utilFunctions/subcomponentUtils'
+import { createComponentName } from '../utilFunctions/componentsData'
 import { insertUuidIntoState, insertingIntoDescendant } from './utils/updateStateUtils';
 import { findIndex, forEach, remove } from "lodash";
 import { DropZoneTypes } from "../constants/DropZoneTypes";
@@ -50,12 +51,15 @@ const component = (state = {}, action) => {
 const components = (state = [], action) => {
 	switch(action.type) {
 		case 'ADD_NEW_COMPONENT':
+			var newName = createComponentName(action.compProperties.componentType, state);
+			var newComponent = component(undefined, action);
+			newComponent["name"] = newName;
 			if (action.compProperties.componentType == "Form") {
-				return [...state, component(undefined, action)];
+				return [...state, newComponent];
 			}
 			var newState = state.map(component => Object.assign({},component))
 			var insertInChildren = action.dropZoneType === DropZoneTypes.CONTENT;
-			var updatedState = insertUuidIntoState([...newState, component(undefined, action)], action.compProperties.Uuid, action.afterId, insertInChildren);
+			var updatedState = insertUuidIntoState([...newState, newComponent], action.compProperties.Uuid, action.afterId, insertInChildren);
 			return updatedState
 			// return [...state, component(undefined, action)]
 
@@ -69,7 +73,7 @@ const components = (state = [], action) => {
 		 * the given ID, and then updates the value of the specified property
 		 */
 		case 'UPDATE_COMPONENT':
-			var newState = [...state];
+			var newState = state.map(component => Object.assign({},component));
 			for (var i=0; i<state.length;i++) {
 				if (state[i].Uuid === action.componentId) {
 					newState[i] = component(state[i], action);					
