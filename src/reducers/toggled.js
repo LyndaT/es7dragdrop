@@ -7,23 +7,16 @@
  */
 
 const toggled = (state = {}, action) => {
-	var newState = {};
-	Object.keys(state).forEach(function(id) {
-		newState[id] = state[id]
-	})
-	// console.log(state)
+	var newState = Object.assign({}, state);
 	switch(action.type) {
 		case 'TOGGLE_COMPONENT':
-			newState[action.id] = !newState[action.id]
+			newState[action.componentId] = !newState[action.componentId]
 			return newState
 		case 'ADD_NEW_COMPONENT':
 			newState[action.compProperties.Uuid] = true;
-			// console.log("newState");
-			// console.log(newState);
 			return newState;
 		case 'DELETE_COMPONENT':
-			newState = Object.assign({}, state);
-			delete newState[action.id];
+			delete newState[action.componentId];
 			return newState;
 		default:
 			return state

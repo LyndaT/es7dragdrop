@@ -10,9 +10,9 @@ const selectedScreen = (state = "", action) => {
 			if (action.compProperties.componentType === "Form") return action.compProperties.Uuid;
 			else return state;
 		case 'SELECT_SCREEN':
-			return action.id
+			return action.screenId
 		case 'DELETE_COMPONENT':
-			if (state === action.id) return "0";
+			if (state === action.componentId) return "0";
 			else return state;
 		default:
 			return state

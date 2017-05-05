@@ -25,7 +25,7 @@ const component = (state = {}, action) => {
 			return newState
 
 		case 'UPDATE_COMPONENT':
-			// assume that state.id == action.id, bc of components function below
+			// assume that state.componentId == action.componentId, bc of components function below
 			componentPropertyNames = Object.keys(state);
 			componentPropertyNames.forEach(function(property) {
 				newState[property] = state[property];
@@ -63,7 +63,7 @@ const components = (state = [], action) => {
 		case 'UPDATE_COMPONENT':
 			var newState = [...state];
 			for (var i=0; i<state.length;i++) {
-				if (state[i].Uuid === action.id) {
+				if (state[i].Uuid === action.componentId) {
 					newState[i] = component(state[i], action);					
 				}
 			}
@@ -74,24 +74,24 @@ const components = (state = [], action) => {
 		 * If screen is "Screen1", i.e. component id = "0", nothing happens
 		 */
 		case 'DELETE_COMPONENT':
-			var subComps = getAllSubcomponents(action.id, state);
+			var subComps = getAllSubcomponents(action.componentId, state);
 			var newState = [];
 			state.forEach(function(component) {
-				var comp = Object.assign({}, component);
-				if (comp.children && comp.children.includes(action.id)) {
+				var componentObj = Object.assign({}, component);
+				if (componentObj.children && componentObj.children.includes(action.componentId)) {
 					// find index of input in it's parent's array of children
-					var index = comp.children.indexOf(action.id);
+					var index = componentObj.children.indexOf(action.componentId);
 					// slice - create a copy of array
-					var children = comp.children.slice();
+					var children = componentObj.children.slice();
 					// splice - modifies array, deletes # items starting at index
 					children.splice(index, 1);
-					comp.children = children;
+					componentObj.children = children;
 				}
 
 				// if component is not a subcomponent of input
-				if (!subComps.hasOwnProperty(comp.Uuid)) {
+				if (!subComps.hasOwnProperty(componentObj.Uuid)) {
 					// add the component to new state
-					newState.push(comp);
+					newState.push(componentObj);
 				}
 			})
 			return newState;
