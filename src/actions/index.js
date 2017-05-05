@@ -11,7 +11,6 @@
  * deleteComponent - deletes a component
  * moveComponent
  */
-let nextId = 2
 
 export function addToBin(item) {
 	return {
@@ -22,14 +21,17 @@ export function addToBin(item) {
 	}
 }
 
+let nextId = 2
+const createUuid = require('uuid/v4');
+
 // action with new component type, screen to add it to, and afterId/dropZoneType
 // Effects on store:
-//   components: adds new component object
+//   components: adds new component object with randomly generated uuid
 //   toggled: adds new key
 //   selectedComponent, selectedScreen: changes to uuid of new screen if form is added
 export function addNewComponent(compType, selectedScreen, afterId, dropZoneType) {
   var name = compType + nextId;
-  var compProperties = {name:name, componentType: compType, Uuid:(nextId++).toString(), version:"1", screenId:selectedScreen};
+  var compProperties = {name:name, componentType: compType, Uuid: createUuid(), version:"1", screenId:selectedScreen};
   return Object.assign({type: 'ADD_NEW_COMPONENT'}, { compProperties, afterId, dropZoneType })
 }
 

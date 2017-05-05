@@ -47,7 +47,7 @@ export default class AddComponent extends Component {
     	"EXPERIMENTAL":
     		["FirebaseDB"],
     	"LAYOUT":
-    		["Form","HorizontalArrangement","HorizontalScrollArrangement","TableArrangement","VerticalArrangement","VerticalScrollArrangement"],
+    		["HorizontalArrangement","HorizontalScrollArrangement","TableArrangement","VerticalArrangement","VerticalScrollArrangement"],
     	"INTERNAL":
     		["GameClient","MediaStore","PhoneStatus","Voting"]
     }
