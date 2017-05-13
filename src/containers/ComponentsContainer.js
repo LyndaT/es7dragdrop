@@ -17,6 +17,9 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
   removeComponent: (uuid, selectedScreen) => {
   	dispatch(deleteComponent(uuid, selectedScreen))
+  },
+  renameModal: () => {
+  	dispatch({type: "SELECT_RENAME_COMPONENT", name: "name"})
   }
 })
 

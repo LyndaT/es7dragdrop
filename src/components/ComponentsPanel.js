@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ComponentNodeContainer from '../containers/ComponentNodeContainer'
+import RenameComponentContainer from '../containers/RenameComponentContainer'
 
 /**
  * ComponentsPanel creates the Components panel with the nested components
@@ -17,11 +18,18 @@ export default class ComponentsPanel extends Component {
 		var name= nestedTree["$Name"];
 		var id = nestedTree["Uuid"];
 		var subs = nestedTree["$Components"];
-		var disableDelete = (this.props.selectedComponent === this.props.selectedScreen);
+
+		// disables Delete and Rename button for screens
+		var disableButton = (this.props.selectedComponent === this.props.selectedScreen);
 
 		return (
 			<div>
-				<button onClick={() => thisComponent.props.removeComponent(thisComponent.props.selectedComponent, thisComponent.props.selectedScreen)} disabled={disableDelete}>Delete</button>
+				<span>
+				<button onClick={() => thisComponent.props.renameModal()} disabled={disableButton}>Rename</button>
+				<RenameComponentContainer/>
+				</span>
+
+				<button onClick={() => thisComponent.props.removeComponent(thisComponent.props.selectedComponent, thisComponent.props.selectedScreen)} disabled={disableButton}>Delete</button>
 
 				<ComponentNodeContainer name={name} id={id} subcomponents={subs}/>
 			</div>

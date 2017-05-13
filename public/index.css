@@ -158,3 +158,12 @@
   padding: 20px;
   transform: translate(-50%, -50%);
 }
+
+.ReactModal_RenameComponent {
+  position: fixed;
+  background-color: #FFFFFF;
+  left: 50%;
+  top: 50%;
+  padding: 20px;
+  transform: translate(-50%, -50%);
+}

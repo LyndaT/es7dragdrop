@@ -23,10 +23,16 @@ const editorSettings = (state = {}, action) => {
 			var newState = Object.assign({}, state);
 			newState.selectedImage = action.url;
 			return newState;
+		case 'SELECT_RENAME_COMPONENT':
+			var newState = Object.assign({}, state);
+			newState.renameComponentVisible = true;
+			newState.selectedProperty = action.name;
+			return newState;
 		case 'CLOSE_MODALS':
 			var newState = Object.assign({}, state);
 			newState.imagePickerVisible = false;
 			newState.colorPickerVisible = false;
+			newState.renameComponentVisible = false;
 			newState.selectedImage = null;
 			return newState;
 		// case 'SELECT_COLOR':
