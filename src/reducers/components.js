@@ -76,7 +76,12 @@ const components = (state = [], action) => {
 			var newState = state.map(component => Object.assign({},component));
 			for (var i=0; i<state.length;i++) {
 				if (state[i].Uuid === action.componentId) {
-					newState[i] = component(state[i], action);					
+					if (action.propertyName == "name" && state[i].componentType == action.propertyInputValue) {
+						alert('Component instance names cannot be the same as a component type');
+					} 
+					else {
+						newState[i] = component(state[i], action);
+					}
 				}
 			}
 			return newState

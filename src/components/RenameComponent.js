@@ -45,11 +45,10 @@ export default class RenameComponent extends Component {
             New Name:
             <input type="text" ref={(input) => this.input = input} defaultValue = {prevName} onFocus={(event) => event.target.select()} onChange={this.handleChange} />
           </label>
+          <br/>
+          <button onClick = {() => {this.props.closeModal()}}>Cancel</button>
           <input type="submit" value="OK" />
         </form>
-
-        <button onClick = {() => {this.props.closeModal()}}>Cancel</button>
-
 
       </div>
       </ReactModal>
