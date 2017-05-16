@@ -74,6 +74,7 @@ const components = (state = [], action) => {
 		 */
 		case 'UPDATE_COMPONENT':
 			var newState = state.map(component => Object.assign({},component));
+			var allComponentNames = state.map(component => component.name);
 			for (var i=0; i<state.length;i++) {
 				if (state[i].Uuid === action.componentId) {
 					if (action.propertyName == "name" && state[i].componentType == action.propertyInputValue) {
