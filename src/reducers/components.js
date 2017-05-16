@@ -84,9 +84,9 @@ const components = (state = [], action) => {
 							alert('Duplicate component name!');
 						} else if (allComponentTypes.indexOf(action.propertyInputValue) != -1) {
 							alert('Component instance names cannot be the same as a component type');
-						} else {
-							newState[i] = component(state[i], action);
-						}
+						} 
+					} else {
+						newState[i] = component(state[i], action);
 					}
 
 				}
