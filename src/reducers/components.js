@@ -3,6 +3,7 @@ import { createComponentName } from '../utilFunctions/componentsData'
 import { insertUuidIntoState, insertingIntoDescendant } from './utils/updateStateUtils';
 import { findIndex, forEach, remove } from "lodash";
 import { DropZoneTypes } from "../constants/DropZoneTypes";
+import { ComponentTypes } from "../constants/ComponentTypes";
 
 /** 
  * A REDUCER handling components in the store.
@@ -74,15 +75,20 @@ const components = (state = [], action) => {
 		 */
 		case 'UPDATE_COMPONENT':
 			var newState = state.map(component => Object.assign({},component));
-			var allComponentNames = state.map(component => component.name);
 			for (var i=0; i<state.length;i++) {
 				if (state[i].Uuid === action.componentId) {
-					if (action.propertyName == "name" && state[i].componentType == action.propertyInputValue) {
-						alert('Component instance names cannot be the same as a component type');
-					} 
-					else {
-						newState[i] = component(state[i], action);
+					if (action.propertyName == "name") {
+						var allExistingNames = state.map(component => component.name);
+						var allComponentTypes = Object.keys(ComponentTypes).map(key => ComponentTypes[key]).reduce((a, b) => a.concat(b),[]);
+						if (allExistingNames.indexOf(action.propertyInputValue) != -1) {
+							alert('Duplicate component name!');
+						} else if (allComponentTypes.indexOf(action.propertyInputValue) != -1) {
+							alert('Component instance names cannot be the same as a component type');
+						} else {
+							newState[i] = component(state[i], action);
+						}
 					}
+
 				}
 			}
 			return newState
