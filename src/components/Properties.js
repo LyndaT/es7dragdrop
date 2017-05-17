@@ -21,7 +21,7 @@ export default class Properties extends Component {
 		var propertyObjectsOfComponent = [];
 		for (var j=0; j<allComponents.length;j++) {
 			if (allComponents[j].name===selectedComponent.componentType) {
-				propertyObjectsOfComponent = allComponents[j]["properties"];
+				propertyObjectsOfComponent = allComponents[j]["properties"].slice();
 			}
 		}
 
@@ -40,8 +40,6 @@ export default class Properties extends Component {
 		}
 
 		var editorTypeArr = [];
-		propertyObjectsOfComponent.push({"name":"name", "editorType":"string", "defaultValue":selectedComponent.name});
-		console.log(propertyObjectsOfComponent)
 		// for each property object
 		for (var i=0; i<propertyObjectsOfComponent.length; i++) {
 			var compPropty = propertyObjectsOfComponent[i];
@@ -63,6 +61,8 @@ export default class Properties extends Component {
 				editorTypeArr.push({"name":propertyObjectsOfComponent[i].name, "editorType":<button type="button">Hi</button>, "defaultValue": "Hi"});
 			}
 		}
+
+		var componentNameEditor = getEditorTypeHTML("string", selectedComponent[name], selectedComponent.Uuid, "name");
 
 		// for each property object in the editorTypeArr array,  
 		// show the property name and the editor Type.
