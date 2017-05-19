@@ -10,6 +10,7 @@ import { PropertyEditorTypes } from '../constants/PropertyEditorTypes.js'
  * or the default values if selectedComponent does not include those properties.
  */
 
+
 export default class Properties extends Component {
 	render() {
 		var thisComponent = this;
@@ -62,13 +63,17 @@ export default class Properties extends Component {
 			}
 		}
 
-		var componentNameEditor = getEditorTypeHTML("string", selectedComponent[name], selectedComponent.Uuid, "name");
+		var componentNameEditor = getEditorTypeHTML("string", selectedComponent.name, selectedComponent.Uuid, "name");
+
+		// componentNameEditor = <input type="text" style={{backgroundColor:"default"}} value={selectedComponent.name} onChange={(event)=>thisComponent.props.updateComponentProperty(selectedComponent.Uuid, "name", event.target.value)} />
 
 		// for each property object in the editorTypeArr array,  
 		// show the property name and the editor Type.
 		return (
 			<div>
 				<span style={{fontWeight:'bold'}}>{selectedComponent.name}</span>
+				<br/>
+				{componentNameEditor}
 				<hr/>
 				{editorTypeArr.map(({name, editorType}) =>
 					<span key={name}> {name} 

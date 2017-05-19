@@ -81,10 +81,14 @@ const components = (state = [], action) => {
 						var allExistingNames = state.map(component => component.name);
 						var allComponentTypes = Object.keys(ComponentTypes).map(key => ComponentTypes[key]).reduce((a, b) => a.concat(b),[]);
 						if (allExistingNames.indexOf(action.propertyInputValue) != -1) {
-							alert('Duplicate component name!');
+							continue;
+							// alert('Duplicate component name!');
 						} else if (allComponentTypes.indexOf(action.propertyInputValue) != -1) {
-							alert('Component instance names cannot be the same as a component type');
-						} 
+							continue;
+							// alert('Component instance names cannot be the same as a component type');
+						} else if (action.propertyInputValue == "") {
+							alert('Component names cannot be empty string');
+						} else newState[i] = component(state[i], action);
 					} else {
 						newState[i] = component(state[i], action);
 					}
