@@ -1,25 +1,12 @@
 import { connect } from 'react-redux'
 import Properties from '../components/Properties'
 import { updateComponent, selectComponent } from '../actions'
+import { createSelectedComponentObject } from '../utilFunctions/componentsData'
 
 /**
  * Properties Container handles the Properties panel, links it to component
  * information in store, and manages updates to specific properties.
  */
-
-function createSelectedComponentObject(state) {
-	var selectComponentObj = {};
-	for (var i=0; i<state.components.length; i++) {
-		if (state.components[i].Uuid === state.selectedComponent) {
-			selectComponentObj = state.components[i];
-			break;
-		}
-		else {
-			selectComponentObj = state.components[0];
-		}
-	}
-	return selectComponentObj;
-}
 
 const mapStateToProps = (state, ownProps) => ({
 	selectedComponent: createSelectedComponentObject(state)

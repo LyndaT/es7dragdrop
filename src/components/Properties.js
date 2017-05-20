@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import simple_components from './simple_components';
 import EditorTypes from './EditorTypes';
 import { PropertyEditorTypes } from '../constants/PropertyEditorTypes.js'
+import RenameContainer from '../containers/RenameContainer'
 
 /**
  * Properties component creates the Properties panel by listing out all the
@@ -73,7 +74,7 @@ export default class Properties extends Component {
 			<div>
 				<span style={{fontWeight:'bold'}}>{selectedComponent.name}</span>
 				<br/>
-				{componentNameEditor}
+				<RenameContainer />
 				<hr/>
 				{editorTypeArr.map(({name, editorType}) =>
 					<span key={name}> {name} 

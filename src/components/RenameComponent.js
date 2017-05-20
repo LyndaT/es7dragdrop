@@ -1,6 +1,11 @@
 import React, { PropTypes, Component } from 'react';
 import ReactModal from 'react-modal';
 
+/**
+* creates the modal for renaming a component
+* works with the Rename button in the components panel.
+*/
+
 export default class RenameComponent extends Component {
 
  constructor(props) {
