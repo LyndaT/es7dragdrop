@@ -94,6 +94,13 @@ export default class Item extends Component {
 
 		}
 
+		var arrangements = new Set(["Form",
+                        			"HorizontalArrangement",
+			                        "HorizontalScrollArrangement",
+			                        "TableArrangement",
+			                        "VerticalArrangement",
+			                        "VerticalScrollArrangement",])
+
 		var ItemType = typeToHTML[this.props.item.type];
 		if (ItemType) {
 			return (
@@ -108,11 +115,14 @@ export default class Item extends Component {
 					/>
 				</div>
 				);
-		} 
-		return (
-			<div onClick={this.handleClick} style={{...style, backgroundColor }}>
-					{name}</div>
-			);
+		} else if (arrangements.has(this.props.item.type)) {
+			return (
+				<div onClick={this.handleClick} style={{...style, backgroundColor }}>
+						{name}</div>
+				);
+		} else {
+			return (<div style = {{display: "none"}}></div>);
+		}
 	}
 
 	render() {

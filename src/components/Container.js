@@ -16,6 +16,37 @@ const style = {
 
 export default class Container extends Component {
   render() {
+
+    console.log(this.props.components);
+
+    var visibleTypes = new Set(["Button",
+                        "Label",
+                        "CheckBox",
+                        "Image",
+                        "PasswordTextBox",
+                        "ListPicker",
+                        "ListView",
+                        "Slider",
+                        "TimePicker",
+                        "TextBox",
+                        "WebViewer",
+                        "Spinner",
+                        "Form",
+                        "HorizontalArrangement",
+                        "HorizontalScrollArrangement",
+                        "TableArrangement",
+                        "VerticalArrangement",
+                        "VerticalScrollArrangement",
+    ]);
+
+    var nonVisibleComponents = [];
+
+    this.props.components.forEach(function(component){
+      if (! visibleTypes.has(component.componentType)){
+        nonVisibleComponents.push(component);
+      } 
+    });
+
     const nestedTree = create_tree(this.props.components, this.props.selectedScreen);
     const dustbins = this.props.dustbins;
     const boxes = [
@@ -33,6 +64,11 @@ export default class Container extends Component {
             find={this.findItem}
             onDrop={this.onDrop}
           />
+        </div>
+        Non-visible Components:
+        <div> {nonVisibleComponents.map((component, i) => {
+          return <div>{nonVisibleComponents[i].name}</div>
+        })}
         </div>
       </div>
     );
