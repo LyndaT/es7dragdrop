@@ -4,7 +4,19 @@ import Tree from './s_Tree';
 import { DragSourceTypes } from '../constants/DragSourceTypes';
 import Dropzone from './Dropzone';
 import { DropZoneTypes } from "../constants/DropZoneTypes";
+
 import ItemButton from './appinventorComponents/s_ItemButton';
+import ItemLabel from './appinventorComponents/s_ItemLabel';
+import ItemCheckbox from './appinventorComponents/s_ItemCheckbox';
+import ItemImage from './appinventorComponents/s_ItemImage';
+import ItemPasswordTextBox from './appinventorComponents/s_ItemPasswordTextBox';
+import ItemListPicker from './appinventorComponents/s_ItemListPicker';
+import ItemListView from './appinventorComponents/s_ItemListView';
+import ItemSlider from './appinventorComponents/s_ItemSlider';
+import ItemTimePicker from './appinventorComponents/s_ItemTimePicker';
+import ItemTextBox from './appinventorComponents/s_ItemTextBox';
+import ItemWebViewer from './appinventorComponents/s_ItemWebViewer';
+import ItemSpinner from './appinventorComponents/s_ItemSpinner';
 
 const style = {
 	padding: '0.5em'
@@ -50,6 +62,7 @@ export default class Item extends Component {
 		this.renderItem = this.renderItem.bind(this);
 	}
 
+
 	handleClick() {
 		this.setState(prevState => ({
 			isToggleOn: !prevState.isToggleOn
@@ -57,18 +70,45 @@ export default class Item extends Component {
 	}
 
 	renderItem(name, backgroundColor, uuid) {
-		//console.log(this.props.component);
-		//console.log(this.props.item.type);
-		if (this.props.item.type == 'Button') {
-			//Pass to ItemButton
+
+		if (this.props.parent != undefined) {
+			//console.log(this.props.parent.componentType);
+		}
+
+		var typeToHTML = {
+			"Button":ItemButton,
+			"Label": ItemLabel,
+			"CheckBox": ItemCheckbox,
+			"Image": ItemImage,
+			"PasswordTextBox": ItemPasswordTextBox,
+			"ListPicker": ItemListPicker,
+			"ListView": ItemListView,
+			"Slider": ItemSlider,
+			"TimePicker": ItemTimePicker,
+			"TextBox": ItemTextBox,
+			"WebViewer": ItemWebViewer,
+			"Spinner": ItemSpinner,
+
+
+			//Arrangements
+
+		}
+
+		var ItemType = typeToHTML[this.props.item.type];
+		if (ItemType) {
 			return (
-				<div>
-					<ItemButton 
-						component={this.props.component}
+				<div onClick={() => this.props.chooseComponent(uuid)} 
+								style={{boxShadow: ((this.props.selected) ? "0 0 10px 2px lightblue" : ""),
+										padding: "0px",
+										//display: "inline-block",
+										float: ((this.props.parent.componentType=="HorizontalArrangement") ? "left" : "")
+										}}>
+					<ItemType
+						component={this.props.component} parent={this.props.parent}
 					/>
 				</div>
 				);
-		}
+		} 
 		return (
 			<div onClick={this.handleClick} style={{...style, backgroundColor }}>
 					{name}</div>
@@ -89,10 +129,11 @@ export default class Item extends Component {
 		}
 
 
-		//console.log(Uuid,$Name, $Components, parent)
 		let contentDropzoneStyle = {};
 		if(this.hasContentDropzone(item.type)) {
 		  contentDropzoneStyle["display"] = "block";
+		  contentDropzoneStyle["paddingTop"] = "5px";
+		  contentDropzoneStyle["paddingBottom"] = "5px";
 		} else {
 		  contentDropzoneStyle["display"] = "none";
 		}
