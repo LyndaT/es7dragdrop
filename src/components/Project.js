@@ -4,7 +4,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import DragContainer from '../containers/DragContainer';
 import PropertiesContainer from '../containers/PropertiesContainer';
 import ComponentsContainer from '../containers/ComponentsContainer';
-import AddComponentContainer from '../containers/AddComponentContainer'; //prev AddButtonContainer
+import AddComponentContainer from '../containers/AddComponentContainer';
 import ExportContainer from '../containers/ExportContainer';
 import ScreensContainer from '../containers/ScreensContainer';
 

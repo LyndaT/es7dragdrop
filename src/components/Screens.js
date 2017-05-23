@@ -23,6 +23,8 @@ export default class Screens extends Component {
 		var thisComponent = this;
 		var screens = this.props.screens;
 
+		var disableDelete = this.props.selectedScreen === "0";
+
 		const options = [];
 
 		var screenMap = {};
@@ -36,8 +38,8 @@ export default class Screens extends Component {
 
 		return (
 			<div>
-				<button onClick={() => this.props.addComponent("Form", null)}>Add Screen</button>
-				<button onClick={() => this.props.removeScreen(thisComponent.props.selectedScreen)}>Remove Screen</button>
+				<button onClick={() => this.props.addComponent("Form", "0")}>Add Screen</button>
+				<button onClick={() => this.props.removeScreen(thisComponent.props.selectedScreen)} disabled={disableDelete}>Remove Screen</button>
 				<br/>
 				<Dropdown options={options} onChange={(option)=>{thisComponent.props.chooseScreen(option.value)}} value = {screenMap[this.props.selectedScreen]} placeholder = {screenMap[this.props.selectedScreen]}/>
 				{screens.map(({name, Uuid}) => {

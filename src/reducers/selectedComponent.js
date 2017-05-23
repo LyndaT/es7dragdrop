@@ -1,25 +1,32 @@
 
-/**
- * A REDUCER handling selectedComponent in the store, changed when:
- *			component is selected (Components panel)
- * 			component or ancestor is toggled (Components panel)
+/*
+ * A REDUCER handling selectedComponent in the store.
+ * selectedComponent is the UUID of the currently selected component.
+ * It is changed when:
+ *			component is selected
+ * 			component or ancestor is toggled
+ *			new component is added
+ *			screen is selected
+ *
+ * Affects what is shown in Components and Properties panels.
  */
 
 const selectedComponent = (state = "", action) => {
 	switch(action.type) {
 		case 'SELECT_COMPONENT':
-			return action.id
+			return action.componentId
 		case 'TOGGLE_COMPONENT':
-			if (action.hasSelectedSubcomp) return action.id;
+			if (action.hasSelectedSubcomp) return action.componentId;
 			else return state;
 		case 'ADD_NEW_COMPONENT':
-			if (action.componentType === "Form") return action.Uuid;
+			if (action.compProperties.componentType === "Form") {
+				return action.compProperties.Uuid;
+			}
 			else return state;
 		case 'SELECT_SCREEN':
-			return action.id
+			return action.screenId
 		case 'DELETE_COMPONENT':
-			if (action.deleteScreen) return "0";
-			else return action.selectedScreen;
+			return action.selectedScreen;
 		default:
 			return state
 	}

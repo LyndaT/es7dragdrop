@@ -4,7 +4,7 @@ import AddComponent from '../components/AddComponent'
 import { addNewComponent } from '../actions'
 
 /**
- * Add Button Container handles the Palette and adding of components to the project.
+ * Add Component Container handles the Palette and adding of components to the project.
  * It links Palette to the Components panel as well.
  */
 

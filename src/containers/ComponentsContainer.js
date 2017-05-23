@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import ComponentsPanel from '../components/ComponentsPanel'
 import { deleteComponent } from '../actions'
-import { create_tree } from '../components/helperFunctions'
+import { create_tree } from '../utilFunctions/subcomponentUtils'
 
 /**
  * ComponentsContainer.js handles the Components panel in AI, as well as 
@@ -15,8 +15,11 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  removeComponent: (id, selectedScreen, delScreen=false) => {
-  	dispatch(deleteComponent(id, selectedScreen, delScreen))
+  removeComponent: (uuid, selectedScreen) => {
+  	dispatch(deleteComponent(uuid, selectedScreen))
+  },
+  renameModal: () => {
+  	dispatch({type: "SELECT_RENAME_COMPONENT", name: "name"})
   }
 })
 

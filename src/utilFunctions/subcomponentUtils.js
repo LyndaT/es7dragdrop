@@ -1,10 +1,10 @@
 /**
+ * Called in ComponentsContainer.js and Container.js
  * Given the data array of component objects, puts together the content
  * that will be in the Scheme file.
  * This is a nested object, where the Components for each component is
  * an array of its children objects
- * ASSUMPTION: there is only one screen in the project (i.e. returns 
- * an object of 1 screen, not an array of multiple screen objects)
+ * This tree is rooted at the screen object with ID = screenId
  * @return proj (object): JSON object that will be in the Scheme file
  */
 export function create_tree(arr, screenId) {
@@ -46,6 +46,7 @@ export function create_tree(arr, screenId) {
 }
 
 /** 
+ * called by create_tree() above
  * Given the data array (of component objects), creates a dictionary
  * of JSON objects, which contain name and id values.
  * Dictionary maps the component's unique ID to its JSON object
@@ -67,6 +68,7 @@ function create_all_objects(arr) {
 	return objs;
 }
 
+// called by reducers/components.js and hasChildSelected() below
 export function getAllSubcomponents(id, allComps, subComps={}) {
   subComps[id] = true;
   var idObj = findIdObj(id, allComps);
@@ -78,6 +80,7 @@ export function getAllSubcomponents(id, allComps, subComps={}) {
   return subComps;
 }
 
+// called by getAllSubcomponents() above
 // given the component ID, returns its corresponding object
 function findIdObj(id, comps) {
   for (var i=0; i<comps.length; i++) {
@@ -88,6 +91,7 @@ function findIdObj(id, comps) {
   return null
 }
 
+// called by ComponentNodeContainer.js
 // helper for toggleComponent - checks if a component has a subcomponent that is selected.
 export function hasChildSelected(id, components, selected) {
   return getAllSubcomponents(id, components).hasOwnProperty(selected);

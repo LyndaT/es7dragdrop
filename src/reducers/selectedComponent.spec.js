@@ -1,33 +1,53 @@
-import selectedScreen from './selectedScreen'
+import selectedComponent from './selectedComponent'
 
 
 /**
  * Partitions:
  * initial state: nothing, 0, id != 0
  * actions: 
- *	 ADD_NEW_COMPONENT
- *			componentType: is Form, not Form
- *	 SELECT_SCREEN
- *	 DELETE_COMPONENT
- *			state ==, != action.id
- *			state == 0, != 0
- *	 default
- * 
+ *		SELECT_COMPONENT
+ *		TOGGLE_COMPONENT
+ *			component does/does't have subcomponent that is selected
+ *		ADD_NEW_COMPONENT
+ *			componentType is/isn't Form
+ *		SELECT_SCREEN
+ *		DELETE_COMPONENT
+ *			
+
+ *		default
  */
-describe('selectedScreen reducer',() => {
+describe('selectedComponent reducer',() => {
 	it('should return the initial state', () => {
 		expect(
-			selectedScreen("", {})
+			selectedComponent("", {})
 		).toEqual("")
 
 		expect(
-			selectedScreen(undefined, {})
+			selectedComponent(undefined, {})
 		).toEqual("")
+	})
+
+	it('should handle TOGGLE_COMPONENT', () => {
+		expect(
+			selectedComponent("", {
+				type: "TOGGLE_COMPONENT",
+				id: "1",
+				hasSelectedSubcomp: true
+			})
+		).toEqual("1")
+
+		expect(
+			selectedComponent("0", {
+				type:"TOGGLE_COMPONENT",
+				id:"4",
+				hasSelectedSubcomp: false
+			})
+		).toEqual("0")
 	})
 
 	it('should handle ADD_NEW_COMPONENT', () => {
 		expect(
-			selectedScreen("0", {
+			selectedComponent("0", {
 				type: 'ADD_NEW_COMPONENT',
 				name: "Form2",
 				componentType:"Form",
@@ -38,7 +58,7 @@ describe('selectedScreen reducer',() => {
 		).toEqual("2")
 
 		expect(
-			selectedScreen("1", {
+			selectedComponent("1", {
 				type: 'ADD_NEW_COMPONENT',
 				name: "Button3",
 				componentType:"Button",
@@ -51,7 +71,7 @@ describe('selectedScreen reducer',() => {
 
 	it('should handle SELECT_SCREEN', () => {
 		expect(
-			selectedScreen("0", {
+			selectedComponent("0", {
 				type: 'SELECT_SCREEN',
 				id:"1"
 			})
@@ -59,39 +79,20 @@ describe('selectedScreen reducer',() => {
 	})
 
 	it('should handle DELETE_COMPONENT', () => {
-		// Deleting 0 is not allowed by UI
-		// so id:"0" when selectedScreen != "0" is not tested
 		expect(
-			selectedScreen("0", {
-				type: 'DELETE_COMPONENT',
-				id:"0",
-				selectedScreen: "0"
-			})
-		).toEqual("0")
-
-		expect(
-			selectedScreen("0", {
+			selectedComponent("1", {
 				type: 'DELETE_COMPONENT',
 				id:"1",
 				selectedScreen: "0"
 			})
 		).toEqual("0")
+	})
 
 		expect(
-			selectedScreen("1", {
+			selectedComponent("0", {
 				type: 'DELETE_COMPONENT',
 				id:"1",
-				selectedScreen: "1"
-			})
-		).toEqual("0")
-
-
-		expect(
-			selectedScreen("1", {
-				type: 'DELETE_COMPONENT',
-				id:"2",
 				selectedScreen: "1"
 			})
 		).toEqual("1")
-	})	
 })

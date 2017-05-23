@@ -2,13 +2,15 @@
 
 /** 
  * ACTIONS - includes:
- * add to Bin
+ * addToBin
  * addNewComponent - adds new component to list of components 
  * updateComponent - updates specific property of a component
  * selectComponent - updates which component is selected
  * toggleComponent - updates component if toggled
+ * selectScreen - updates which screen is selected
+ * deleteComponent - deletes a component
+ * moveComponent
  */
-let nextId = 2
 
 export function addToBin(item) {
 	return {
@@ -19,41 +21,63 @@ export function addToBin(item) {
 	}
 }
 
+let nextId = 2
+const createUuid = require('uuid/v4');
+
+// action with new component type, screen to add it to, and afterId/dropZoneType
+// Effects on store:
+//   components: adds new component object with randomly generated uuid
+//   toggled: adds new key
+//   selectedComponent, selectedScreen: changes to uuid of new screen if form is added
 export function addNewComponent(compType, selectedScreen, afterId, dropZoneType) {
   var name = compType + nextId;
-  var compProperties = {name:name, componentType: compType, Uuid:(nextId++).toString(), version:"1", screenId:selectedScreen};
+  var compProperties = {name:name, componentType: compType, Uuid: createUuid(), version:"1", screenId:selectedScreen};
   return Object.assign({type: 'ADD_NEW_COMPONENT'}, { compProperties, afterId, dropZoneType })
 }
 
-// updates specific property value to input value for a component - Properties Panel
-export function updateComponent(componentId, propertyName, inputValue) {
-  var info = {id: componentId, propertyName: propertyName, propertyInputValue: inputValue};
+// action with ID of component, specific property to be updated, and property's new value
+// Effects on store:
+//   components: adds/updates value of the property for this component object
+export function updateComponent(compId, propertyName, inputValue) {
+  var info = {componentId: compId, propertyName: propertyName, propertyInputValue: inputValue};
   return Object.assign({type: 'UPDATE_COMPONENT'}, info)
 }
 
-// updates selected component - Properties panel and Components Panel
-export function selectComponent(componentId) {
-  return Object.assign({type: 'SELECT_COMPONENT'}, {id: componentId})
+// action with the ID of the component to be selected
+// Effects on store:
+//   selectedComponent: changed to this component's id
+export function selectComponent(compId) {
+  return Object.assign({type: 'SELECT_COMPONENT'}, {componentId: compId})
 }
 
-
-// if toggled, subcomponents are shown/hidden, selectedComponents change if 
-// current selectedComponent is hidden due to toggled parent
-export function toggleComponent(componentId, hasSelectedSubcomp) {
-  return Object.assign({type: 'TOGGLE_COMPONENT'}, {id: componentId, hasSelectedSubcomp:hasSelectedSubcomp})
+// action with ID of component to be toggled and
+//        whether or not it has subcomponent that is currently selected.
+// Effects on store:
+//   selectedComponent: changed to this if a subcomponent is selected (and this is closed)
+//   toggled: changes the state of this component to the opposite boolean
+export function toggleComponent(compId, hasSelectedSubcomp) {
+  return Object.assign({type: 'TOGGLE_COMPONENT'}, {componentId: compId, hasSelectedSubcomp:hasSelectedSubcomp})
 }
 
-export function selectScreen(screenId) {
-  return Object.assign({type: 'SELECT_SCREEN'}, {id: screenId})
+// action with the ID of the screen to be selected
+// Effects on store:
+//   selectedComponent, selectedScreen: changed to this screen's id
+export function selectScreen(scrId) {
+  return Object.assign({type: 'SELECT_SCREEN'}, {screenId: scrId})
 }
 
-export function deleteComponent(compId, selScreen, delScreen) {
-  return Object.assign({type: 'DELETE_COMPONENT'}, {id: compId, selectedScreen: selScreen, deleteScreen: delScreen})
+// action with the ID of the component to be deleted and the ID of the screen it is in
+//    the ID of the screen should be "0" if the component is a form
+// Effects on store:
+//   selectedComponent: changes to id of screen this component was originally in,
+//                      or to Screen1 ("0") if this component is a form
+//   selectedScreen: changes to "0" if this component was a form
+//   toggled: removes the id key of this component, but not any subcomponent id's
+//   components: removes the objects for this component and all subcomponents
+export function deleteComponent(compId, selScreen) {
+  return Object.assign({type: 'DELETE_COMPONENT'}, {componentId: compId, selectedScreen: selScreen})
 }
 
 export function moveComponent(id, afterId, dropZoneType) {
   return Object.assign({type: 'MOVE_COMPONENT'}, {id, afterId, dropZoneType})
 }
-
-// update component
-// id, property name, new property value

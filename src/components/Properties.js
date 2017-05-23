@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import simple_components from './simple_components';
 import EditorTypes from './EditorTypes';
+import { PropertyEditorTypes } from '../constants/PropertyEditorTypes.js'
+import RenameContainer from '../containers/RenameContainer'
 
 /**
  * Properties component creates the Properties panel by listing out all the
@@ -8,6 +10,7 @@ import EditorTypes from './EditorTypes';
  * It also sets the editor Types to the values for the component's properties,
  * or the default values if selectedComponent does not include those properties.
  */
+
 
 export default class Properties extends Component {
 	render() {
@@ -17,52 +20,18 @@ export default class Properties extends Component {
 		// Get the list of property objects for the selected component
 		// Use simple_components to get list
 		var allComponents = simple_components.simpleComponents;
-		var componentProperties = [];
+		var propertyObjectsOfComponent = [];
 		for (var j=0; j<allComponents.length;j++) {
 			if (allComponents[j].name===selectedComponent.componentType) {
-				componentProperties = allComponents[j]["properties"];
+				propertyObjectsOfComponent = allComponents[j]["properties"].slice();
 			}
 		}
 
-		// Object where key is name of editor type and value is its React Class
-		var typeToHTML = {
-			"textArea": EditorTypes.TextArea,
-			"horizontal_alignment": EditorTypes.HorizontalAlignment,
-			"vertical_alignment": EditorTypes.VerticalAlignment,
-			"string": EditorTypes.StringInput,
-			"color": EditorTypes.ColorInput,
-			"asset": EditorTypes.Asset,
-			"screen_animation": EditorTypes.ScreenAnimation,
-			"screen_orientation": EditorTypes.ScreenOrientation,
-			"boolean": EditorTypes.BooleanInput,
-			"sizing": EditorTypes.Sizing,
-			"non_negative_integer": EditorTypes.NonNegativeInteger,
-			"accelerometer_sensitivity": EditorTypes.AccelerometerSensitivity,
-			"float": EditorTypes.Float,
-			"typeface": EditorTypes.Typeface,
-			"button_shape": EditorTypes.ButtonShape,
-			"textalignment": EditorTypes.TextAlignment,
-			"visibility": EditorTypes.Visibility,
-			"non_negative_float": EditorTypes.NonNegativeFloat,
-			"BluetoothClient": EditorTypes.BluetoothClient,
-			"lego_ev3_color_sensor_mode": EditorTypes.LegoEv3ColorSensorMode,
-			"lego_ev3_sensor_port": EditorTypes.LegoEv3SensorPort,
-			"lego_ev3_gyro_sensor_mode": EditorTypes.LegoEV3GyroSensorMode,
-			"lego_ev3_ultrasonic_sensor_mode": EditorTypes.LegoEv3UltrasonicSensorMode,
-			"FirbaseURL": EditorTypes.FirbaseURL, //******
-			"sensor_dist_interval": EditorTypes.SensorDistInterval,
-			"sensor_time_interval": EditorTypes.SensorTimeInterval,
-			"toast_length": EditorTypes.ToastLength,
-			"lego_nxt_generated_color": EditorTypes.LegoNxtGeneratedColor,
-			"lego_nxt_sensor_port": EditorTypes.LegoNxtSensorPort,
-			"countries": EditorTypes.Countries,
-			"languages": EditorTypes.Languages,
-			"text_receiving": EditorTypes.TextReceiving
-		};
+		var typeToHTML = PropertyEditorTypes;
 
 		// Function that returns the HTML for the specified editor type
-		// HTML includes function that allows update of specific property
-		// If editor type is not here, return null
+		// 		HTML includes function that allows update of specific property
+		// 		If editor type is not here, return null
 		var getEditorTypeHTML = function(editorType, inputValue, componentId, propertyName) {
 			var EdType = typeToHTML[editorType];
 			if (EdType) {
@@ -74,8 +43,8 @@ export default class Properties extends Component {
 
 		var editorTypeArr = [];
 		// for each property object
-		for (var i=0; i<componentProperties.length; i++) {
-			var compPropty = componentProperties[i];
+		for (var i=0; i<propertyObjectsOfComponent.length; i++) {
+			var compPropty = propertyObjectsOfComponent[i];
 
 			// set property value to most updated value, else set it to default value
 			if (selectedComponent[compPropty.name]) {
@@ -91,15 +60,21 @@ export default class Properties extends Component {
 				editorTypeArr.push({"name":compPropty.name, "editorType":editorTypeHTML});
 			}
 			else {
-				editorTypeArr.push({"name":componentProperties[i].name, "editorType":<button type="button">Hi</button>, "defaultValue": "Hi"});
+				editorTypeArr.push({"name":propertyObjectsOfComponent[i].name, "editorType":<button type="button">Hi</button>, "defaultValue": "Hi"});
 			}
 		}
+
+		var componentNameEditor = getEditorTypeHTML("string", selectedComponent.name, selectedComponent.Uuid, "name");
+
+		// componentNameEditor = <input type="text" style={{backgroundColor:"default"}} value={selectedComponent.name} onChange={(event)=>thisComponent.props.updateComponentProperty(selectedComponent.Uuid, "name", event.target.value)} />
 
 		// for each property object in the editorTypeArr array,  
 		// show the property name and the editor Type.
 		return (
 			<div>
 				<span style={{fontWeight:'bold'}}>{selectedComponent.name}</span>
+				<br/>
+				<RenameContainer />
 				<hr/>
 				{editorTypeArr.map(({name, editorType}) =>
 					<span key={name}> {name} 

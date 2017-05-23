@@ -8,16 +8,15 @@ import { addNewComponent } from '../actions/index';
 export default class AIComponent extends Component {
 	static propTypes = {
         compType: PropTypes.string.isRequired,
-        onClick: PropTypes.func.isRequired,
         onDrop: PropTypes.func.isRequired,
 		connectDragSource: PropTypes.func.isRequired,
 	} ;
 
 	render() {
-        const {compType, onClick, connectDragSource} = this.props;
+        const {compType, connectDragSource} = this.props;
         return connectDragSource(
             <div key={compType}>
-                <button onClick={() => onClick(compType)}>
+                <button>
                     {compType}
                 </button>
                 <br/>

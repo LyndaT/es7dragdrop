@@ -4,7 +4,7 @@ import ReactModal from 'react-modal';
 
 export default class ImagePicker extends Component {
   render() {
-  	console.log(this.props);
+  	// console.log(this.props);
   	var property = this.props.property;
     var component = this.props.component;
     var maximagewidth = 200;
